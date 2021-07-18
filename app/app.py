@@ -1,13 +1,13 @@
 from typing import List, Dict
 import mysql.connector
 import simplejson as json
-from flask import render_template
 from flask import Flask, Response
+from flask import render_template
 
 app = Flask(__name__)
 
-
 def cities_import() -> List[Dict]:
+
     config = {
         'user': 'root',
         'password': 'root',
@@ -25,7 +25,6 @@ def cities_import() -> List[Dict]:
     connection.close()
 
     return result
-
 
 @app.route('/')
 def index():
