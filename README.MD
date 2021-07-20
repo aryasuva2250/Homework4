@@ -18,4 +18,5 @@ Before editing
 After editing
 ![after editing](screenshots/afterEditing.PNG)
 #Deleting a Person
+Abby has been deleted
 ![deleting a person](screenshots/abbyDeleted.PNG)
