@@ -63,7 +63,7 @@ def form_insert_post():
     cursor = mysql.get_db().cursor()
     inputData = (request.form.get('Name'), request.form.get('Sex'), request.form.get('Age'),
                  request.form.get('Height_in'), request.form.get('Weight_lbs'))
-    sql_insert_query = """INSERT INTO biostatsT (Name,Sex,Age,Height_in,Weight_lbs ) VALUES (%s, %s,%s, %s,%s, %s,%s) """
+    sql_insert_query = """INSERT INTO biostatsT (Name,Sex,Age,Height_in,Weight_lbs) VALUES (%s, %s,%s, %s,%s) """
     cursor.execute(sql_insert_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
