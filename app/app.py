@@ -1,12 +1,12 @@
 from typing import List, Dict
 import simplejson as json
-from flask import Flask, request, Response, redirect
+from flask import Flask, request, Response, redirect, make_response, jsonify #imported flask
 from flask import render_template
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 
 
-app = Flask(__name__)
+app = Flask(__name__) #create flask's app name
 mysql = MySQL(cursorclass=DictCursor)
 
 app.config['MYSQL_DATABASE_HOST'] = 'db'
@@ -16,8 +16,22 @@ app.config['MYSQL_DATABASE_PORT'] = 3306
 app.config['MYSQL_DATABASE_DB'] = 'biostats'
 mysql.init_app(app)
 
+app= Flask(
+    __name__,
+    instance_relative_config=False,
+    template_folder="templates",
+    static_folder="static"
+)
 
-@app.route('/', methods=['GET'])
+@app.route("/", methods=['GET'])
+def hello():
+    if request.method != 'GET':
+        return make_response('Malformed request', 400)
+    my_dict = {'key': 'dictionary value'}
+    headers = {"Content-Type": "application/json"}
+    return make_response(jsonify(my_dict), 200, headers)
+
+@app.route('/', methods=['GET'])  #app route
 def index():
     user = {'username': "Miguel's Project"}
     cursor = mysql.get_db().cursor()
